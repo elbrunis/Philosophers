@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/23 19:45:52 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/24 19:54:03 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,15 @@ typedef struct	t_philo
 	t_fork	*left_fork;
 	t_fork	*right_fork;
 }				t_philo;
+
+// parse
+int		parse_input(int argc, char **argv);
+int		check_arg(char *arg);
+// utils
+int		ft_error(char *err_msg);
+int		is_num(char c);
+long	ft_atoul(char *str);
+
+
 
 #endif

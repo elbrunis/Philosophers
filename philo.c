@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:40 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/23 19:51:05 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/25 09:27:34 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 int main(int argc, char **argv)
 {
     if (argc < 5|| argc > 6)
-        return (1);
-    // parse_imput(argv)
+        return(ft_error("invlaid_input"));
+    if (!parse_input(argc, argv))
+        return(ft_error("invlaid_input"));
     // init_program
     // start_simulation
     // end_program

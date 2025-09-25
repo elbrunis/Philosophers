@@ -1,9 +1,16 @@
+# Tareas
+- corregir lo que le pasa a mi codigo que no funciona lo de corregir
+- subir todo a github
+- crear una backup de la maquina virtual (que se guarde varias versiones unas 3 y que se suba a la nube para que luego se pueda abrir desde otro dispositivo)
+- empezar con el parseo
+
 # Reglas Importantes a Tener en Cuenta (Parte Obligatoria)
 
 ## Lenguaje y Estilo
 
 - **Lenguaje:** El proyecto debe ser desarrollado en **C**.
 - **Norma 42:**
+  - (NO SE PUEDE UTILIZAR EXIT)
   - Máximo de 25 líneas por función.
   - Indentación de 4 espacios.
   - No se permiten variables globales (ni `static` fuera de funciones).
@@ -35,3 +42,6 @@ La ejecución del programa se hará con los siguientes parámetros:
 
 ```bash
 ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+
+
+
