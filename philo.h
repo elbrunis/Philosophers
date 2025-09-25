@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/24 19:54:03 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:26:26 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ typedef struct	s_fork
 	pthread_mutex_t	mutex;
 }				t_fork;
 
-typedef struct s_table
-{
-	int		num_of_philo;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	int		meals_limit; //optional
-}			t_table;
-
 typedef struct	t_philo
 {
 	int		id;
@@ -47,13 +38,29 @@ typedef struct	t_philo
 	t_fork	*right_fork;
 }				t_philo;
 
+typedef struct s_table
+{
+	int		num_of_philo;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+	int		meals_limit; //optional
+	t_philo	**philos;
+}			t_table;
+
 // parse
-int		parse_input(int argc, char **argv);
+int		parse_input(int argc, char **argv, t_table **table);
 int		check_arg(char *arg);
 // utils
 int		ft_error(char *err_msg);
 int		is_num(char c);
 long	ft_atoul(char *str);
+// init
+int		init_table(int argc, char **argv, t_table **table);
+int		init_structs(int argc, char **argv, t_table **table);
+// free
+int		free_structs(t_table **table);
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:28 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/25 09:28:30 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:51:21 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_arg(char *arg)
 	return (1);
 }
 
-int	parse_input(int argc, char **argv)
+int	parse_input(int argc, char **argv, t_table **table)
 {
  	int	i;
 
@@ -42,5 +42,7 @@ int	parse_input(int argc, char **argv)
 			return (0);
 		i++;
 	}
+	if (!init_structs(argc, argv, table))
+		return (0);
 	return (1);
 }
