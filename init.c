@@ -6,13 +6,13 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/25 18:54:09 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:57:58 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_table(int argc, char **argv, t_table **table)
+static int	init_table(int argc, char **argv, t_table **table)
 {
 	*table = (t_table *)malloc(sizeof(t_table));
 	if(!*table)
@@ -31,16 +31,12 @@ int	init_table(int argc, char **argv, t_table **table)
 	return (1);
 }
 
-int	init_structs(int argc, char **argv, t_table **table)
+static int	init_philos(int num_of_philo, t_philo **philos)
 {
-	int		i;
-	t_philo **philos;
+	int	i;
 
 	i = 0;
-	if (!init_table(argc, argv, table))
-		return (0);
-	philos = (*table)->philos;
-	while(i < (*table)->num_of_philo)
+	while(i < num_of_philo)
 	{
 		philos[i] = (t_philo *)malloc(sizeof(t_philo));
 		if (!philos[i])
@@ -53,6 +49,14 @@ int	init_structs(int argc, char **argv, t_table **table)
 		i++;
 	}
 	philos[i] = NULL;
-	
+	return (1);
+}
+
+int	init_structs(int argc, char **argv, t_table **table)
+{
+	if (!init_table(argc, argv, table))
+		return (0);
+	if (!init_philos((*table)->num_of_philo, (*table)->philos))
+		return (0);
 	return (1);
 }

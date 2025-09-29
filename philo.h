@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/25 18:26:26 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/29 12:47:23 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		ft_error(char *err_msg);
 int		is_num(char c);
 long	ft_atoul(char *str);
 // init
-int		init_table(int argc, char **argv, t_table **table);
 int		init_structs(int argc, char **argv, t_table **table);
 // free
 int		free_structs(t_table **table);
