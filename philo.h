@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/29 12:47:23 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/09/30 09:04:14 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_table
 	long	time_to_eat;
 	long	time_to_sleep;
 	int		meals_limit; //optional
+	t_fork	*forks;
 	t_philo	**philos;
 }			t_table;
 
