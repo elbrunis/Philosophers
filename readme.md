@@ -1,9 +1,7 @@
 # Tareas
-- asignar los tenedores a todos los philosofos
-- y iniciar los hilos a cada philosofo
-- preparar lo de los tiempos es decir lo de los milisegundos y toda la paranoya
-- revisar que este todo listo para ir con la simulacion
 - programar toda la simulacion
+  - revisar nuestro papelito
+  - ver como vamos a sincronizar todo
 
 
 - crear una backup de la maquina virtual (que se guarde varias versiones unas 3 y que se suba a la nube para que luego se pueda abrir desde otro dispositivo)

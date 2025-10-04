@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/30 09:41:44 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:30:49 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ static int	init_table(int argc, char **argv, t_table **table)
 	return (1);
 }
 
-static int	init_philos(int num_of_philo, t_philo **philos, t_fork *forks)
+static int	init_philos(t_table *table, t_philo **philos, t_fork *forks)
 {
 	int	i;
 
 	i = 0;
-	while(i < num_of_philo)
+	while(i < table->num_of_philo)
 	{
 		philos[i] = (t_philo *)malloc(sizeof(t_philo));
 		if (!philos[i])
@@ -67,7 +67,8 @@ static int	init_philos(int num_of_philo, t_philo **philos, t_fork *forks)
 		philos[i]->meals_counter = 0;
 		philos[i]->last_meal_time = 0;
 		philos[i]->left_fork = &forks[i];
-		philos[i]->right_fork = &forks[(i + 1) % num_of_philo];
+		philos[i]->right_fork = &forks[(i + 1) % table->num_of_philo];
+		philos[i]->table = table;
 		i++;
 	}
 	philos[i] = NULL;
@@ -78,7 +79,7 @@ int	init_structs(int argc, char **argv, t_table **table)
 {
 	if (!init_table(argc, argv, table))
 		return (0);
-	if (!init_philos((*table)->num_of_philo, (*table)->philos, (*table)->forks))
+	if (!init_philos(*table, (*table)->philos, (*table)->forks))
 		return (0);
 	return (1);
 }

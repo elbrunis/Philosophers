@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:40 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/25 18:49:51 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/01 13:54:14 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int main(int argc, char **argv)
 		return(ft_error("invlaid_input"));
 	if (!parse_input(argc, argv, &table))
 		return(ft_error("invlaid_input"));
-	// init_program
-	// start_simulation
+	if (!start_simulation(table))
+		return(ft_error("simulation_failed"));
 	// end_program
 	free_structs(&table);
 	return (0);
