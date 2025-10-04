@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/03 13:30:49 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/04 12:07:26 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	init_table(int argc, char **argv, t_table **table)
 	*table = (t_table *)malloc(sizeof(t_table));
 	if(!*table)
 		return (0);
+	(*table)->start_time = 0;
 	(*table)->num_of_philo = ft_atoul(argv[1]);
 	(*table)->time_to_die = ft_atoul(argv[2]);
 	(*table)->time_to_eat = ft_atoul(argv[3]);

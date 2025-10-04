@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/03 13:37:36 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/04 13:25:36 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static long	get_time_ms(void)
 
 	if (gettimeofday(&t, NULL) != 0)
 		return (0);
-	result = (t.tv_sec * 1000L) + (t.tv_usec * 1000L);
+	result = (t.tv_sec * 1000L) + (t.tv_usec / 1000L);
 	return (result);
 }
 void	*rutine(void *data)
@@ -29,7 +29,9 @@ void	*rutine(void *data)
 
 	philo = (t_philo *)data;
 	table = philo->table;
-	printf("hola soy el %d\n", philo->id);
+	while (get_time_ms() < table->start_time)
+		usleep(200); //se pone usleep para que no consuma el 100% de la cpu
+	printf("hola soy el %ld\n", ( get_time_ms() - table->start_time));
 	return (NULL);
 }
 static int	create_theards(t_table *table)
@@ -58,11 +60,9 @@ static int	create_theards(t_table *table)
 
 int	start_simulation(t_table *table)
 {
-	long	start_time;
-
-	start_time = get_time_ms();
-	printf("put_time: %ld\n", start_time);
-	if (!start_time)
+	table->start_time = get_time_ms() + 200;
+	printf("put_time: %ld\n", table->start_time);
+	if (!table->start_time)
 		return (0);
 	if (!create_theards(table))
 		return (0);

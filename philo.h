@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/03 12:20:16 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/04 12:06:52 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	t_philo
 typedef struct s_table
 {
 	int		num_of_philo;
+	long	start_time;
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
