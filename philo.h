@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/03 12:20:16 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/07 11:36:12 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 
 typedef struct s_table t_table;
 
+typedef enum	e_status
+{
+	DIED,
+	EATING,
+	THINKING,
+	SLEEPING,
+	FORK_1,
+	FORK_2,
+}				t_status;
+
 typedef struct	s_fork
 {
 	int				id;
@@ -41,14 +51,17 @@ typedef struct	t_philo
 	t_table		*table;
 	pthread_t	theard;
 }				t_philo;
-
+// inicializar todos los datos comentados
 typedef struct s_table
 {
 	int		num_of_philo;
+	// int	is_simulation_over;
+	// long	start_time
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
 	int		meals_limit; //optional
+	// pthread_mutex_t	output_mutex;
 	t_fork	*forks;
 	t_philo	**philos;
 }			t_table;
@@ -60,6 +73,7 @@ int		check_arg(char *arg);
 int		ft_error(char *err_msg);
 int		is_num(char c);
 long	ft_atoul(char *str);
+long	get_time_ms(void);
 // init
 int		init_structs(int argc, char **argv, t_table **table);
 // free
