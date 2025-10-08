@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/07 13:35:55 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:43:57 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ bool	is_simulation_over(t_table *table)
 {
 	bool	result;
 
-	retult = false;
+	result = true;
 	pthread_mutex_lock(&table->die_mutex);
-	if (is_finished == true)
-		result = true;
+	if (table->is_finished == true)
+		result = false;
 	pthread_mutex_unlock(&table->die_mutex);
 	return (result);
 }
@@ -61,7 +61,7 @@ bool	eat_rutine(t_table *table, t_philo *philo)
 	print_status(table, philo->id, EATING);
 	if(!simulate_action_time(table, table->time_to_eat))
 		return (false);
-	table->last_meal_time = get_time_ms();
+	philo->last_meal_time = get_time_ms();
 	pthread_mutex_unlock(&philo->left_fork->mutex);
 	pthread_mutex_unlock(&philo->right_fork->mutex);
 	return (true);
@@ -89,8 +89,10 @@ void	*rutine(void *data)
 		sleep_rutine(table, philo);
 	while (is_simulation_over(table)) // aqui crear una fucion externa para verificar
 	{
-		eat_rutine(table, philo);
-		sleep_rutine(table, philo);
+		if (!eat_rutine(table, philo))
+			return (NULL);
+		if (!sleep_rutine(table, philo))
+			return (NULL);
 	}	
 	return (NULL);
 }
@@ -120,8 +122,6 @@ static int	create_theards(t_table *table)
 
 int	start_simulation(t_table *table)
 {
-	if (!start_time)
-		return (0);
 	if (!create_theards(table))
 		return (0);
 	return (1);

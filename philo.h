@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/07 13:21:54 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:31:45 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ typedef struct	t_philo
 typedef struct s_table
 {
 	int		num_of_philo;
-	// bool	is_finished;
-	// long	start_time
+	bool	is_finished;
+	long	start_time;
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
 	int		meals_limit; //optional
-	// pthread_mutex_t	output_mutex;
-	// pthread_mutex_t	die_mutex;
+	pthread_mutex_t	output_mutex;
+	pthread_mutex_t	die_mutex;
 	t_fork	*forks;
 	t_philo	**philos;
 }			t_table;
@@ -82,6 +82,8 @@ int		init_structs(int argc, char **argv, t_table **table);
 int		free_structs(t_table **table);
 // simulation
 int		start_simulation(t_table *table);
+// mutex
+void	print_status(t_table *table, int id, t_status status);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/03 13:30:49 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:29:47 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	init_table(int argc, char **argv, t_table **table)
 	(*table)->time_to_die = ft_atoul(argv[2]);
 	(*table)->time_to_eat = ft_atoul(argv[3]);
 	(*table)->time_to_sleep = ft_atoul(argv[4]);
+	(*table)->is_finished = false;
+	(*table)->start_time = 0;
 	if (argc == 6)
 		(*table)->meals_limit = ft_atoul(argv[5]);
 	else
@@ -49,6 +51,10 @@ static int	init_table(int argc, char **argv, t_table **table)
 		return (0);
 	(*table)->forks = init_forks((*table)->num_of_philo);
 	if (!(*table)->forks)
+		return (0);
+	if(pthread_mutex_init(&(*table)->output_mutex, NULL) != 0)
+		return (0);
+	if(pthread_mutex_init(&(*table)->die_mutex, NULL) != 0)
 		return (0);
 	return (1);
 }
