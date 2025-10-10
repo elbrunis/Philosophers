@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 08:37:47 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 10:42:26 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	is_simulation_alive(t_table *table, t_philo *philo) //NO ESTA CONECTADA TOD
 	long	time_since_last_meal;
 
 	result = true;
-	time_since_last_meal = (get_time_ms() - table->start_time) - philo->last_meal_time;
+	time_since_last_meal = time_since_start(table) - philo->last_meal_time;
 	/*pthread_mutex_lock(&table->output_mutex);
 	printf("time_since_last_meal %ld\n", time_since_last_meal);
 	printf("table->time_to_die %ld\n", table->time_to_die);
@@ -40,7 +40,6 @@ void	is_simulation_alive(t_table *table, t_philo *philo) //NO ESTA CONECTADA TOD
 	pthread_mutex_unlock(&table->output_mutex);*/
 	if (time_since_last_meal > table->time_to_die)// ¡¡¡¡RIESGO DE FALTA DE MUTEX!!!!
 	{
-		print_status(table, 0 ,DEBUG);
 		print_status(table, philo->id, DIED);
 		result = false;
 	}
@@ -91,7 +90,7 @@ bool	eat_rutine(t_table *table, t_philo *philo)
 	print_status(table, philo->id, EATING);
 	if(!simulate_action_time(table, philo, table->time_to_eat))
 		return (false);
-	philo->last_meal_time = get_time_ms();
+	philo->last_meal_time = time_since_start(table);
 	philo->meals_counter++;
 	pthread_mutex_unlock(&philo->left_fork->mutex);
 	pthread_mutex_unlock(&philo->right_fork->mutex);

@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 08:04:58 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 10:24:12 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		ft_error(char *err_msg);
 int		is_num(char c);
 long	ft_atoul(char *str);
 long	get_time_ms(void);
+long	time_since_start(t_table *table);
 // init
 int		init_structs(int argc, char **argv, t_table **table);
 // free

@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 08:11:27 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 10:41:12 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	init_philos(t_table *table, t_philo **philos, t_fork *forks)
 			return (0);
 		philos[i]->id = i + 1;
 		philos[i]->meals_counter = 0;
-		philos[i]->last_meal_time = 10000000;
+		philos[i]->last_meal_time = 0;
 		if (philos[i]->id % 2 == 0)
 		{
 			philos[i]->left_fork = &forks[i];
