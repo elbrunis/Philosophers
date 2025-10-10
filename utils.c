@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:56:09 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/04 13:35:46 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 08:36:11 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long	get_time_ms(void)
 
 	if (gettimeofday(&t, NULL) != 0)
 		return (0);
-	result = (t.tv_sec * 1000L) + (t.tv_usec * 1000L);
+	result = (t.tv_sec * 1000L) + (t.tv_usec / 1000L);
 	return (result);
 }
 

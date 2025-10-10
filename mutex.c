@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 11:35:16 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/08 13:34:56 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 08:07:35 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,11 @@ void	print_status(t_table *table, int id, t_status status)
 		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "has taken fork_1");
 	if (status == FORK_2)
 		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "has taken a fork_2");
+	
+	if (status == DEBUG)//TEMPORAL
+	{
+		pthread_mutex_lock(&table->output_mutex);
+		printf("hola, estoy aqui\n");	
+		pthread_mutex_unlock(&table->output_mutex);
+	}
 }

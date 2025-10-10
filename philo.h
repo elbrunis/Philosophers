@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/08 17:17:12 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 08:04:58 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum	e_status
 	SLEEPING,
 	FORK_1,
 	FORK_2,
+	DEBUG,//TEMPORAL
 }				t_status;
 
 typedef struct	s_fork

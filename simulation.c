@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/09 13:29:45 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 08:37:47 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,18 @@ void	lock_execute_unlock(pthread_mutex_t	*mutex, void (*f)(void *), void *arg)
 void	is_simulation_alive(t_table *table, t_philo *philo) //NO ESTA CONECTADA TODAVIA
 {
 	bool	result;
+	long	time_since_last_meal;
 
 	result = true;
-	if (philo->last_meal_time > time_to_die)// ¡¡¡¡RIESGO DE FALTA DE MUTEX!!!!
+	time_since_last_meal = (get_time_ms() - table->start_time) - philo->last_meal_time;
+	/*pthread_mutex_lock(&table->output_mutex);
+	printf("time_since_last_meal %ld\n", time_since_last_meal);
+	printf("table->time_to_die %ld\n", table->time_to_die);
+	printf("get_time_ms() %ld\n", get_time_ms() );
+	pthread_mutex_unlock(&table->output_mutex);*/
+	if (time_since_last_meal > table->time_to_die)// ¡¡¡¡RIESGO DE FALTA DE MUTEX!!!!
 	{
+		print_status(table, 0 ,DEBUG);
 		print_status(table, philo->id, DIED);
 		result = false;
 	}
@@ -46,11 +54,12 @@ void	is_simulation_alive(t_table *table, t_philo *philo) //NO ESTA CONECTADA TOD
 	}	
 }
 
-bool	is_simulation_over(t_table *table)
+bool	is_simulation_over(t_table *table, t_philo *philo)
 {
 	bool	result;
 
 	result = false;
+	is_simulation_alive(table, philo);
 	pthread_mutex_lock(&table->die_mutex);
 	if (table->is_finished == true)
 		result = true;
@@ -58,14 +67,14 @@ bool	is_simulation_over(t_table *table)
 	return (result);
 }
 
-bool	simulate_action_time(t_table *table, int time_action)
+bool	simulate_action_time(t_table *table, t_philo *philo, int time_action)
 {
 	long	limit_time;
 
 	limit_time = get_time_ms() + time_action;
 	while (get_time_ms() < limit_time)
 	{
-		if (is_simulation_over(table))
+		if (is_simulation_over(table, philo))
 			return (false);
 		usleep(100);
 	}
@@ -80,9 +89,10 @@ bool	eat_rutine(t_table *table, t_philo *philo)
 	pthread_mutex_lock(&philo->right_fork->mutex);
 	print_status(table, philo->id, FORK_2);
 	print_status(table, philo->id, EATING);
-	if(!simulate_action_time(table, table->time_to_eat))
+	if(!simulate_action_time(table, philo, table->time_to_eat))
 		return (false);
 	philo->last_meal_time = get_time_ms();
+	philo->meals_counter++;
 	pthread_mutex_unlock(&philo->left_fork->mutex);
 	pthread_mutex_unlock(&philo->right_fork->mutex);
 	return (true);
@@ -91,7 +101,7 @@ bool	eat_rutine(t_table *table, t_philo *philo)
 bool	sleep_rutine(t_table *table, t_philo *philo)
 {
 	print_status(table, philo->id, SLEEPING);
-	if(!simulate_action_time(table, table->time_to_sleep))
+	if(!simulate_action_time(table, philo, table->time_to_sleep))
 		return (false);
 	return (true);
 }
@@ -107,7 +117,7 @@ void	*rutine(void *data)
 		usleep(100);
 	if (philo->id % 2)
 		sleep_rutine(table, philo);
-	while (!is_simulation_over(table)) // aqui crear una fucion externa para verificar
+	while (!is_simulation_over(table, philo)) // aqui crear una fucion externa para verificar
 	{
 		if (!eat_rutine(table, philo))
 			return (NULL);
