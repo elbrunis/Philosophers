@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/09 12:11:56 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:29:45 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,26 @@ void	lock_execute_unlock(pthread_mutex_t	*mutex, void (*f)(void *), void *arg)
 	pthread_mutex_unlock(mutex);
 }
 */
+
+void	is_simulation_alive(t_table *table, t_philo *philo) //NO ESTA CONECTADA TODAVIA
+{
+	bool	result;
+
+	result = true;
+	if (philo->last_meal_time > time_to_die)// ¡¡¡¡RIESGO DE FALTA DE MUTEX!!!!
+	{
+		print_status(table, philo->id, DIED);
+		result = false;
+	}
+	if (table->meals_limit > 0 && philo->meals_counter >= table->meals_limit)// ¡¡¡¡RIESGO DE FALTA DE MUTEX!!!!
+		result = false;
+	if (result == false)
+	{
+		pthread_mutex_lock(&table->die_mutex);
+		table->is_finished = true;
+		pthread_mutex_unlock(&table->die_mutex);
+	}	
+}
 
 bool	is_simulation_over(t_table *table)
 {
@@ -65,9 +85,6 @@ bool	eat_rutine(t_table *table, t_philo *philo)
 	philo->last_meal_time = get_time_ms();
 	pthread_mutex_unlock(&philo->left_fork->mutex);
 	pthread_mutex_unlock(&philo->right_fork->mutex);
-	pthread_mutex_lock(&table->output_mutex);
-	printf("HOLA\n");
-	pthread_mutex_unlock(&table->output_mutex);	
 	return (true);
 }
 
@@ -86,7 +103,6 @@ void	*rutine(void *data)
 
 	philo = (t_philo *)data;
 	table = philo->table;
-	table->start_time = get_time_ms() + 200;
 	while (get_time_ms() < table->start_time)
 		usleep(100);
 	if (philo->id % 2)
@@ -108,6 +124,7 @@ static int	create_theards(t_table *table)
 
 	i = 0;
 	philo = table->philos;
+	table->start_time = get_time_ms() + 300;
 	while (i < table->num_of_philo)
 	{
 		if (pthread_create(&philo[i]->theard, NULL, rutine, philo[i])) // se puede hacer tambien asi &table->philo[i]->theard
