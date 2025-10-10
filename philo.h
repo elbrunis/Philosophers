@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 10:24:12 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 11:39:47 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ long	time_since_start(t_table *table);
 // init
 int		init_structs(int argc, char **argv, t_table **table);
 // free
-int		free_structs(t_table **table);
+int		free_structs(t_table *table);
 // simulation
 int		start_simulation(t_table *table);
 // mutex

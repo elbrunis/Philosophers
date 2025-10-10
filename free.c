@@ -6,30 +6,49 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 10:39:35 by biniesta          #+#    #+#             */
-/*   Updated: 2025/09/25 18:46:15 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/10 11:41:39 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	free_structs(t_table **table)
+void	free_forks(t_table *table)
 {
 	int	i;
 
-	i = 0;
-	if ((*table)->philos)
+	if (table->forks)
 	{
-		while ((*table)->philos[i])
+		i = 0;
+		while (i < table->num_of_philo)
 		{
-			free((*table)->philos[i]);
+			pthread_mutex_destroy(&table->forks[i].mutex);
 			i++;
 		}
-		free((*table)->philos);
+		free(table->forks);
 	}
-	if (table && *table)
+}
+static void	free_philos(t_table *table)
+{
+	int	i;
+
+	if (table->philos)
 	{
-		free(*table);
-		*table = NULL;
+		i = 0;
+		while(i < table->num_of_philo)
+		{
+			free(table->philos[i]);
+			i++;
+		}
+		free(table->philos);
 	}
+}
+int	free_structs(t_table *table)
+{
+	pthread_mutex_destroy(&table->output_mutex);
+	pthread_mutex_destroy(&table->die_mutex);
+	free_forks(table);
+	free_philos(table);
+	if (table)
+		free(table);
 	return(1);
 }
