@@ -6,13 +6,13 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:56:09 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/18 13:45:10 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:20:39 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	time_since_start(t_table *table)
+long	since_start(t_table *table)
 {
 	return (get_time_ms() - table->start_time);
 }

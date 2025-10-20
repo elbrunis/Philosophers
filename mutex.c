@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 11:35:16 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/18 14:08:56 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:21:17 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,18 @@ static void	write_ouput(pthread_mutex_t	*mutex, long time, int id, char *status)
 
 void	print_status(t_table *table, int id, t_status status)
 {
-	long	start_time;
-
-	start_time = table->start_time;
 	if (status == DIED)
-		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "died");
+		write_ouput(&table->output_mutex, since_start(table), id, "died");
 	if (status == EATING)
-		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "is eating");
+		write_ouput(&table->output_mutex, since_start(table), id, "is eating");
 	if (status == THINKING)
-		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "is thinking");
+		write_ouput(&table->output_mutex, since_start(table), id, "is thinking");
 	if (status == SLEEPING)
-		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "is sleeping");
+		write_ouput(&table->output_mutex, since_start(table), id, "is sleeping");
 	if (status == FORK_1)
-		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "has taken fork_1");
+		write_ouput(&table->output_mutex, since_start(table), id, "has taken fork_1");
 	if (status == FORK_2)
-		write_ouput(&table->output_mutex, (get_time_ms() - start_time), id, "has taken a fork_2");
+		write_ouput(&table->output_mutex, since_start(table), id, "has taken a fork_2");
 	if (status == DEBUG)
 	{
 		pthread_mutex_lock(&table->output_mutex);

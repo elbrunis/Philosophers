@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:49:21 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/18 14:02:09 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:32:05 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		ft_error(char *err_msg);
 int		is_num(char c);
 long	ft_atoul(char *str);
 long	get_time_ms(void);
-long	time_since_start(t_table *table);
+long	since_start(t_table *table);
 // init
 int		init_structs(int argc, char **argv, t_table **table);
 // free
@@ -86,5 +86,9 @@ int		free_structs(t_table *table);
 int		start_simulation(t_table *table);
 // mutex
 void	print_status(t_table *table, int id, t_status status);
+// simulate action
+void	is_simulation_alive(t_table *table, t_philo *philo);
+bool	is_simulation_over(t_table *table, t_philo *philo);
+bool	simulate_action_time(t_table *table, t_philo *philo, int time_action);
 
 #endif
