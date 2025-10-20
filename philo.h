@@ -5,28 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/23 19:44:45 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 11:39:47 by biniesta         ###   ########.fr       */
+/*   Created: 2025/10/18 13:49:21 by biniesta          #+#    #+#             */
+/*   Updated: 2025/10/18 14:02:09 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_h
-# define PHILO_h
+#ifndef PHILO_H
+# define PHILO_H
 
-#include <stdbool.h>	 // bolean values
-#include <stdio.h>       // printf
-#include <stdlib.h>      // malloc, free
-#include <string.h>      // memset
-#include <unistd.h>      // write, usleep
-#include <sys/time.h>    // gettimeofday
-#include <pthread.h>     // pthread_* functions
-#include <limits.h>		 // INT_MAX
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <limits.h>
 
-// argv= ./philo "num_of_philo"  "time_to_die"  "time_to_eat" "time_to_sleep" "[num_of_times_each_philo_must_eat]
+// argv= ./philo "num_of_philo"  "time_to_die"  "time_to_eat" "time_to_sleep"
+// "[num_of_times_each_philo_must_eat]
+typedef struct s_table	t_table;
 
-typedef struct s_table t_table;
-
-typedef enum	e_status
+typedef enum e_status
 {
 	DIED,
 	EATING,
@@ -35,38 +35,38 @@ typedef enum	e_status
 	FORK_1,
 	FORK_2,
 	DEBUG,//TEMPORAL
-}				t_status;
+}			t_status;
 
-typedef struct	s_fork
+typedef struct s_fork
 {
 	int				id;
 	pthread_mutex_t	mutex;
 }				t_fork;
 
-typedef struct	t_philo
+typedef struct t_philo
 {
 	int			id;
 	long		meals_counter;
-	long 		last_meal_time;
+	long		last_meal_time;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	t_table		*table;
 	pthread_t	theard;
 }				t_philo;
-// inicializar todos los datos comentados
+
 typedef struct s_table
 {
-	int		num_of_philo;
-	bool	is_finished;
-	long	start_time;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	int		meals_limit; //optional
+	int				num_of_philo;
+	bool			is_finished;
+	long			start_time;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	int				meals_limit;
 	pthread_mutex_t	output_mutex;
 	pthread_mutex_t	die_mutex;
-	t_fork	*forks;
-	t_philo	**philos;
+	t_fork			*forks;
+	t_philo			**philos;
 }			t_table;
 
 // parse
@@ -86,8 +86,5 @@ int		free_structs(t_table *table);
 int		start_simulation(t_table *table);
 // mutex
 void	print_status(t_table *table, int id, t_status status);
-
-
-
 
 #endif

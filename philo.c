@@ -6,25 +6,23 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:40 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 11:35:48 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/18 14:04:27 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// argv= ./philo "num_of_philo"  "time_to_die"  "time_to_eat" "time_to_sleep" "[num_of_times_each_philo_must_eat]
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_table *table;
+	t_table	*table;
 
 	table = NULL;
-	if (argc < 5|| argc > 6)
-		return(ft_error("invlaid_input"));
+	if (argc < 5 || argc > 6)
+		return (ft_error("invlaid_input"));
 	if (!parse_input(argc, argv, &table))
-		return(ft_error("invlaid_input"));
+		return (ft_error("invlaid_input"));
 	if (!start_simulation(table))
-		return(ft_error("simulation_failed"));
-	// end_program
+		return (ft_error("simulation_failed"));
 	free_structs(table);
 	return (0);
 }

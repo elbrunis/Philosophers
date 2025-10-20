@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 10:41:12 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/20 09:05:33 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static t_fork	*init_forks(int num_of_forks)
 	int		i;
 
 	forks = (t_fork *)malloc(sizeof(t_fork) * num_of_forks);
-	if(!forks)
+	if (!forks)
 		return (NULL);
 	i = 0;
-	while(i < num_of_forks)
+	while (i < num_of_forks)
 	{
 		forks[i].id = i;
-		if(pthread_mutex_init(&forks[i].mutex, NULL) != 0)
+		if (pthread_mutex_init(&forks[i].mutex, NULL) != 0)
 			return (NULL);
 		i++;
 	}
@@ -34,7 +34,7 @@ static t_fork	*init_forks(int num_of_forks)
 static int	init_table(int argc, char **argv, t_table **table)
 {
 	*table = (t_table *)malloc(sizeof(t_table));
-	if(!*table)
+	if (!*table)
 		return (0);
 	(*table)->num_of_philo = ft_atoul(argv[1]);
 	(*table)->time_to_die = ft_atoul(argv[2]);
@@ -46,15 +46,15 @@ static int	init_table(int argc, char **argv, t_table **table)
 		(*table)->meals_limit = ft_atoul(argv[5]);
 	else
 		(*table)->meals_limit = -1;
-	(*table)->philos = (t_philo**)malloc(sizeof(t_philo*) * ((*table)->num_of_philo + 1));
+	(*table)->philos = (t_philo **)malloc(sizeof(t_philo *) * ((*table)->num_of_philo + 1));
 	if (!(*table)->philos)
 		return (0);
 	(*table)->forks = init_forks((*table)->num_of_philo);
 	if (!(*table)->forks)
 		return (0);
-	if(pthread_mutex_init(&(*table)->output_mutex, NULL) != 0)
+	if (pthread_mutex_init(&(*table)->output_mutex, NULL) != 0)
 		return (0);
-	if(pthread_mutex_init(&(*table)->die_mutex, NULL) != 0)
+	if (pthread_mutex_init(&(*table)->die_mutex, NULL) != 0)
 		return (0);
 	return (1);
 }
@@ -64,7 +64,7 @@ static int	init_philos(t_table *table, t_philo **philos, t_fork *forks)
 	int	i;
 
 	i = 0;
-	while(i < table->num_of_philo)
+	while (i < table->num_of_philo)
 	{
 		philos[i] = (t_philo *)malloc(sizeof(t_philo));
 		if (!philos[i])
@@ -72,16 +72,8 @@ static int	init_philos(t_table *table, t_philo **philos, t_fork *forks)
 		philos[i]->id = i + 1;
 		philos[i]->meals_counter = 0;
 		philos[i]->last_meal_time = 0;
-		if (philos[i]->id % 2 == 0)
-		{
-			philos[i]->left_fork = &forks[i];
-			philos[i]->right_fork = &forks[(i + 1) % table->num_of_philo];
-		}
-		else
-		{
-			philos[i]->left_fork = &forks[(i + 1) % table->num_of_philo];
-			philos[i]->right_fork = &forks[i];
-		}
+		philos[i]->left_fork = &forks[i];
+		philos[i]->right_fork = &forks[(i + 1) % table->num_of_philo];
 		philos[i]->table = table;
 		i++;
 	}

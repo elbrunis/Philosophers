@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 10:39:35 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/10 11:41:39 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/18 14:10:43 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_forks(t_table *table)
 		free(table->forks);
 	}
 }
+
 static void	free_philos(t_table *table)
 {
 	int	i;
@@ -34,7 +35,7 @@ static void	free_philos(t_table *table)
 	if (table->philos)
 	{
 		i = 0;
-		while(i < table->num_of_philo)
+		while (i < table->num_of_philo)
 		{
 			free(table->philos[i]);
 			i++;
@@ -42,6 +43,7 @@ static void	free_philos(t_table *table)
 		free(table->philos);
 	}
 }
+
 int	free_structs(t_table *table)
 {
 	pthread_mutex_destroy(&table->output_mutex);
@@ -50,5 +52,5 @@ int	free_structs(t_table *table)
 	free_philos(table);
 	if (table)
 		free(table);
-	return(1);
+	return (1);
 }
