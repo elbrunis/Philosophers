@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/20 09:29:10 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/20 10:03:06 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,30 @@ static t_fork	*init_forks(int num_of_forks)
 	return (forks);
 }
 
-static int	init_table(int argc, char **argv, t_table **table)
+static int	init_table(int argc, char **argv, t_table *table)
 {
-	*table = (t_table *)malloc(sizeof(t_table));
-	if (!*table)
-		return (0);
-	(*table)->num_of_philo = ft_atoul(argv[1]);
-	(*table)->time_to_die = ft_atoul(argv[2]);
-	(*table)->time_to_eat = ft_atoul(argv[3]);
-	(*table)->time_to_sleep = ft_atoul(argv[4]);
-	(*table)->is_finished = false;
-	(*table)->start_time = 0;
+	int	n_philo;
+
+	n_philo = ft_atoul(argv[1]);
+	table->num_of_philo = ft_atoul(argv[1]);
+	table->time_to_die = ft_atoul(argv[2]);
+	table->time_to_eat = ft_atoul(argv[3]);
+	table->time_to_sleep = ft_atoul(argv[4]);
+	table->is_finished = false;
+	table->start_time = 0;
 	if (argc == 6)
-		(*table)->meals_limit = ft_atoul(argv[5]);
+		table->meals_limit = ft_atoul(argv[5]);
 	else
-		(*table)->meals_limit = -1;
-	(*table)->philos = (t_philo **)malloc(sizeof(t_philo *) * ((*table)->num_of_philo + 1));
-	if (!(*table)->philos)
+		table->meals_limit = -1;
+	table->philos = (t_philo **)malloc(sizeof(t_philo *) * (n_philo + 1));
+	if (!table->philos)
 		return (0);
-	(*table)->forks = init_forks((*table)->num_of_philo);
-	if (!(*table)->forks)
+	table->forks = init_forks(table->num_of_philo);
+	if (!table->forks)
 		return (0);
-	if (pthread_mutex_init(&(*table)->output_mutex, NULL) != 0)
+	if (pthread_mutex_init(&table->output_mutex, NULL) != 0)
 		return (0);
-	if (pthread_mutex_init(&(*table)->die_mutex, NULL) != 0)
+	if (pthread_mutex_init(&table->die_mutex, NULL) != 0)
 		return (0);
 	return (1);
 }
@@ -83,7 +83,10 @@ static int	init_philos(t_table *table, t_philo **philos, t_fork *forks)
 
 int	init_structs(int argc, char **argv, t_table **table)
 {
-	if (!init_table(argc, argv, table))
+	*table = (t_table *)malloc(sizeof(t_table));
+	if (!table)
+		return (0);
+	if (!init_table(argc, argv, *table))
 		return (0);
 	if (!init_philos(*table, (*table)->philos, (*table)->forks))
 		return (0);
