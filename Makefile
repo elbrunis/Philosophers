@@ -1,14 +1,22 @@
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
-SRCS = utils.c philo.c parse.c free.c init.c simulation.c mutex.c simulate_action.c
-OBJS = $(SRCS:.c=.o)
+SRC_DIR = src
+OBJ_DIR = obj
+SRCS = $(SRC_DIR)/simulation/simulation.c $(SRC_DIR)/simulation/simulate_action.c \
+       $(SRC_DIR)/parsing/parse.c $(SRC_DIR)/structs/init.c $(SRC_DIR)/structs/free.c \
+       $(SRC_DIR)/utils/mutex.c $(SRC_DIR)/utils/utils.c
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 RM = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)/$(notdir $(dir $<))
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
