@@ -6,11 +6,11 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:30:09 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/20 09:32:30 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:44:37 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
 void	is_simulation_alive(t_table *table, t_philo *philo)
 {

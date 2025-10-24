@@ -6,11 +6,11 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:28 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/18 14:06:39 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:44:47 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
 /*LO QUE TENGO LISTO*/
 // pueden haber espacios
