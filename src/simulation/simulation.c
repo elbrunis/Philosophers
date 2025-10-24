@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/24 13:44:42 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/24 14:27:34 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	create_theards(t_table *table)
 	t_philo	**philo;
 	int		i;
 	int		j;
-
+		
 	i = 0;
 	philo = table->philos;
 	table->start_time = get_time_ms() + 300;
