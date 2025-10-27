@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 19:44:28 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/24 14:33:47 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:27:51 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	parse_input(int argc, char **argv, t_table **table)
 
 	i = 1;
 	if (ft_atoul(argv[1]) == 1)
-		return (0);
+		return (2);
 	while (i < argc)
 	{
 		if (!check_arg(argv[i]))

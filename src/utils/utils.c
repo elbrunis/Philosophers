@@ -6,11 +6,11 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 10:56:09 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/24 14:37:56 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:16:29 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
 long	since_start(t_table *table)
 {

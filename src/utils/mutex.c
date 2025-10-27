@@ -6,11 +6,11 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 11:35:16 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/20 09:39:18 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:16:25 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
 static void	write_ouput(pthread_mutex_t	*mutex, long time, int id, char *status)
 {

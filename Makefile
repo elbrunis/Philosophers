@@ -1,6 +1,7 @@
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -I.
+CFLAGS = -Wall -Wextra -Werror -pthread -g -fsanitize=thread
+LDFLAGS = -lpthread
 SRC_DIR = src
 OBJ_DIR = obj
 SRCS = $(SRC_DIR)/simulation/simulation.c $(SRC_DIR)/simulation/simulate_action.c \
@@ -12,7 +13,7 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
