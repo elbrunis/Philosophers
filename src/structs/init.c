@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 09:56:26 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/24 13:44:19 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/29 12:31:16 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	init_philos(t_table *table, t_philo **philos, t_fork *forks)
 		philos[i]->left_fork = &forks[i];
 		philos[i]->right_fork = &forks[(i + 1) % table->num_of_philo];
 		philos[i]->table = table;
+		philos[i]->died = 0;
 		i++;
 	}
 	philos[i] = NULL;

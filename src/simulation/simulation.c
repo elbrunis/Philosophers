@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 09:45:37 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/27 20:11:13 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/29 12:47:44 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool	eat_rutine(t_table *table, t_philo *philo)
 	}
 	philo->last_meal_time = since_start(table);
 	philo->meals_counter++;
+	is_simulation_alive(table, philo);
 	free_forks(&philo->left_fork->mutex, &philo->right_fork->mutex);
 	return (true);
 }
@@ -65,11 +66,11 @@ void	*rutine(void *data)
 		usleep(500);
 	if (philo->id % 2)
 		sleep_rutine(table, philo);
-	while (!is_simulation_over(table, philo))
+	while (!is_simulation_over(table, philo) && !philo->died)
 	{
 		if (!eat_rutine(table, philo))
 			return (NULL);
-		if (!sleep_rutine(table, philo))
+		if (!sleep_rutine(table, philo) && !philo->died)
 			return (NULL);
 	}
 	return (NULL);

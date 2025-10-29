@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:30:09 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/24 13:44:37 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/29 12:58:53 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	is_simulation_alive(t_table *table, t_philo *philo)
 		result = false;
 	}
 	if (table->meals_limit > 0 && philo->meals_counter >= table->meals_limit)
-		result = false;
+		philo->died = 1;
 	if (result == false)
 	{
 		pthread_mutex_lock(&table->die_mutex);

@@ -6,7 +6,7 @@
 /*   By: biniesta <biniesta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 13:49:21 by biniesta          #+#    #+#             */
-/*   Updated: 2025/10/20 09:32:05 by biniesta         ###   ########.fr       */
+/*   Updated: 2025/10/29 12:31:39 by biniesta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct t_philo
 	int			id;
 	long		meals_counter;
 	long		last_meal_time;
+	int			died;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	t_table		*table;
